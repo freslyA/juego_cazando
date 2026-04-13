@@ -11,3 +11,7 @@ function mostrarEnSpan(idSpan,valor){
     let componente=document.getElementById(idSpan);
     componente.textContent=valor;
 }
+function graficarRectangulo(x,y,ancho,alto,color){
+    canva.fillStyle=color
+    canva.fillRect(x,y,ancho,alto)
+}

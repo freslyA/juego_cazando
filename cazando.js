@@ -9,12 +9,10 @@ const ANCHO_GATO=40
 const ALTO_COMIDA=20
 const ANCHO_COMIDA=20
 function dibujarGato(){
-    canva.fillStyle="red"
-    canva.fillRect(gatoX,gatoY,ANCHO_GATO,ALTO_GATO)
+    graficarRectangulo(gatoX,gatoY,ANCHO_GATO,ALTO_GATO,"red");
 }
 function dibujarComida(){
-    canva.fillStyle="brown"
-    canva.fillRect(comidaX-ANCHO_COMIDA,comidaY-ALTO_COMIDA,ANCHO_COMIDA,ALTO_COMIDA)
+    graficarRectangulo(comidaX-ANCHO_COMIDA,comidaY-ALTO_COMIDA,ANCHO_COMIDA,ALTO_COMIDA,"brown")
 }
 function inciarJuego(){
     dibujarComida()
