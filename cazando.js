@@ -24,21 +24,30 @@ function limpiarCanva(){
 function moverIzquierda(){
     gatoX=gatoX-10
     actualizarCanva()
+    dectetarColision()
 }
 function moverDerecha(){
     gatoX=gatoX+10
     actualizarCanva()
+    dectetarColision()
 }
 function moverAbajo(){
     gatoY=gatoY+10
     actualizarCanva()
+    dectetarColision()
 }
 function moverArriba(){
     gatoY=gatoY-10
     actualizarCanva()
+    dectetarColision()
 }
 function actualizarCanva(){
     limpiarCanva()
     dibujarGato()
     dibujarComida()
+}
+function dectetarColision(){
+    if(gatoX+ANCHO_GATO>comidaX-ANCHO_COMIDA && gatoY+ALTO_GATO>comidaY-ALTO_COMIDA){
+        alert("cuidado")
+    }
 }
