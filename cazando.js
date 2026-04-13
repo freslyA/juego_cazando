@@ -5,7 +5,8 @@ let gatoY=canvas.height/2
 let comidaX=canvas.width
 let comidaY=canvas.height
 let puntaje=0
-let tiempo=10
+let tiempo=15;
+let intervalo;
 const ALTO_GATO=20
 const ANCHO_GATO=40
 const ALTO_COMIDA=20
@@ -17,30 +18,30 @@ function dibujarComida(){
     graficarRectangulo(comidaX-ANCHO_COMIDA,comidaY-ALTO_COMIDA,ANCHO_COMIDA,ALTO_COMIDA,"brown")
 }
 function inciarJuego(){
-    restarTiempo(tiempo)
-    dibujarComida()
+    restarTiempo()
+    cambiarComida()
     dibujarGato()
 }
 function limpiarCanva(){
     canva.clearRect(0,0,canvas.width,canvas.height)
 }
 function moverIzquierda(){
-    gatoX=gatoX-10
+    gatoX=gatoX-20
     actualizarCanva()
     dectetarColision()
 }
 function moverDerecha(){
-    gatoX=gatoX+10
+    gatoX=gatoX+20
     actualizarCanva()
     dectetarColision()
 }
 function moverAbajo(){
-    gatoY=gatoY+10
+    gatoY=gatoY+20
     actualizarCanva()
     dectetarColision()
 }
 function moverArriba(){
-    gatoY=gatoY-10
+    gatoY=gatoY-20
     actualizarCanva()
     dectetarColision()
 }
@@ -51,25 +52,31 @@ function actualizarCanva(){
 }
 function dectetarColision(){
     if((gatoX+ANCHO_GATO>comidaX-ANCHO_COMIDA && gatoX<comidaX) && (gatoY+ALTO_GATO>comidaY-ALTO_COMIDA && gatoY<comidaY)){
-        alert("cuidado")
-        comidaX=generarAleatorio(0,canvas.width-ANCHO_COMIDA)
-        comidaY=generarAleatorio(0,canvas.height-ALTO_COMIDA)
+        cambiarComida()
         actualizarCanva()
         puntaje=puntaje+1;
+        tiempo=tiempo+6;
         mostrarEnSpan("puntos",puntaje)
     }
+    if(puntaje==6){
+        alert("GANASTE!!!")
+        clearInterval(intervalo);
+    }
 }
-function restarTiempo(segundosIniciales) {
-    let tiempo2 = segundosIniciales;
+function restarTiempo() {
+    intervalo = setInterval(() => {
+        mostrarEnSpan("tiempo", tiempo);
 
-    const intervalo = setInterval(() => {
-        mostrarEnSpan("tiempo",tiempo2)
-
-        if (tiempo2 <= 0) {
+        if (tiempo <= 0) {
             clearInterval(intervalo);
-            console.log("Tiempo terminado");
+            alert("GAME OVER");
         }
 
-        tiempo2--;
-    }, 1000); // se ejecuta cada 1 segundo
+        tiempo--;
+    }, 1000);
+}
+function cambiarComida(){
+    comidaX=generarAleatorio(0,canvas.width-ANCHO_COMIDA)
+    comidaY=generarAleatorio(0,canvas.height-ALTO_COMIDA)
+    dibujarComida()
 }
