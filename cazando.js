@@ -23,6 +23,21 @@ function limpiarCanva(){
 }
 function moverIzquierda(){
     gatoX=gatoX-10
+    actualizarCanva()
+}
+function moverDerecha(){
+    gatoX=gatoX+10
+    actualizarCanva()
+}
+function moverAbajo(){
+    gatoY=gatoY+10
+    actualizarCanva()
+}
+function moverArriba(){
+    gatoY=gatoY-10
+    actualizarCanva()
+}
+function actualizarCanva(){
     limpiarCanva()
     dibujarGato()
     dibujarComida()
