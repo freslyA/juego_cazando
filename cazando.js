@@ -76,7 +76,16 @@ function restarTiempo() {
     }, 1000);
 }
 function cambiarComida(){
-    comidaX=generarAleatorio(0,canvas.width-ANCHO_COMIDA)
-    comidaY=generarAleatorio(0,canvas.height-ALTO_COMIDA)
+    comidaX=generarAleatorio(ANCHO_COMIDA,canvas.width-ANCHO_COMIDA)
+    comidaY=generarAleatorio(ALTO_COMIDA,canvas.height-ALTO_COMIDA)
     dibujarComida()
+}
+function reiniciar(){
+    puntaje=0
+    tiempo=15
+    mostrarEnSpan("tiempo",tiempo)
+    mostrarEnSpan("puntos",puntaje)
+    limpiarCanva()
+    cambiarComida()
+    dibujarGato()
 }
