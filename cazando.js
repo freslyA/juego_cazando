@@ -5,6 +5,7 @@ let gatoY=canvas.height/2
 let comidaX=canvas.width
 let comidaY=canvas.height
 let puntaje=0
+let tiempo=10
 const ALTO_GATO=20
 const ANCHO_GATO=40
 const ALTO_COMIDA=20
@@ -16,6 +17,7 @@ function dibujarComida(){
     graficarRectangulo(comidaX-ANCHO_COMIDA,comidaY-ALTO_COMIDA,ANCHO_COMIDA,ALTO_COMIDA,"brown")
 }
 function inciarJuego(){
+    restarTiempo(tiempo)
     dibujarComida()
     dibujarGato()
 }
@@ -56,4 +58,18 @@ function dectetarColision(){
         puntaje=puntaje+1;
         mostrarEnSpan("puntos",puntaje)
     }
+}
+function restarTiempo(segundosIniciales) {
+    let tiempo2 = segundosIniciales;
+
+    const intervalo = setInterval(() => {
+        mostrarEnSpan("tiempo",tiempo2)
+
+        if (tiempo2 <= 0) {
+            clearInterval(intervalo);
+            console.log("Tiempo terminado");
+        }
+
+        tiempo2--;
+    }, 1000); // se ejecuta cada 1 segundo
 }
