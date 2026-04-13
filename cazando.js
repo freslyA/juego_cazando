@@ -4,6 +4,7 @@ let gatoX=canvas.width/2
 let gatoY=canvas.height/2
 let comidaX=canvas.width
 let comidaY=canvas.height
+let puntaje=0
 const ALTO_GATO=20
 const ANCHO_GATO=40
 const ALTO_COMIDA=20
@@ -47,7 +48,12 @@ function actualizarCanva(){
     dibujarComida()
 }
 function dectetarColision(){
-    if(gatoX+ANCHO_GATO>comidaX-ANCHO_COMIDA && gatoY+ALTO_GATO>comidaY-ALTO_COMIDA){
+    if((gatoX+ANCHO_GATO>comidaX-ANCHO_COMIDA && gatoX<comidaX) && (gatoY+ALTO_GATO>comidaY-ALTO_COMIDA && gatoY<comidaY)){
         alert("cuidado")
+        comidaX=generarAleatorio(0,canvas.width-ANCHO_COMIDA)
+        comidaY=generarAleatorio(0,canvas.height-ALTO_COMIDA)
+        actualizarCanva()
+        puntaje=puntaje+1;
+        mostrarEnSpan("puntos",puntaje)
     }
 }
