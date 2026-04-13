@@ -4,14 +4,13 @@
   <title>Juego Cazando</title>
   <link rel="stylesheet" href="cazando.css">
   <script src="utils.js"></script>
-  <script src="cazando.js"></script>
 
 </head>
-<body>
+<body onload="dibujarGato();">
 
   <h1>Juego Cazando</h1>
   <p>Autor: Fresly Andino</p>
-
+  <canvas id="areaJuego" width="500" height="500"></canvas>
 
   <div class="controles">
     <button>⬆</button>
@@ -29,6 +28,6 @@
 
   <p id="mensaje"></p>
 
-
+  <script src="cazando.js"></script>
 </body>
 </html>
