@@ -18,3 +18,12 @@ function inciarJuego(){
     dibujarComida()
     dibujarGato()
 }
+function limpiarCanva(){
+    canva.clearRect(0,0,canvas.width,canvas.height)
+}
+function moverIzquierda(){
+    gatoX=gatoX-10
+    limpiarCanva()
+    dibujarGato()
+    dibujarComida()
+}
