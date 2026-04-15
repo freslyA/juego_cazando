@@ -1,42 +1,196 @@
+/* Fondo arcade */
+
 body {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  background: #f0f0f0;
   margin: 0;
+  font-family: 'Courier New', monospace;
+  background: radial-gradient(circle at center, #0f0f2e, #000);
+  color: #fff;
+  text-align: center;
+}
+
+/* Contenedor principal */
+.arcade-container {
   padding: 20px;
 }
 
-h1 {
-  margin-bottom: 5px;
+/* Título estilo neón */
+.titulo {
+  font-size: 42px;
+  background: linear-gradient(90deg, #00f7ff, #00ff88, #00f7ff);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: brilloTexto 4s linear infinite;
 }
 
-.panel {
-  margin: 15px 0;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+@keyframes brilloTexto {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+.autor {
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
+/* Pantalla estilo arcade */
+.pantalla {
+  display: inline-block;
+  padding: 15px;
+  border: 4px solid #00f7ff;
+  border-radius: 15px;
+  background: #000;
+  box-shadow: 0 0 20px #00f7ff;
+  position: relative;
+}
+
+/* Canvas con glow */
 canvas {
-  background: white;
-  border: 2px solid black;
+  background: black;
+  border: 2px solid #00f7ff;
+  border-radius: 10px;
+  box-shadow:
+    0 0 20px #00f7ff,
+    0 0 40px rgba(0,255,255,0.5),
+    inset 0 0 20px rgba(0,255,255,0.3);
 }
-
-.controles {
-  margin-top: 20px;
-}
-
-button {
-  margin: 5px;
-  padding: 10px 16px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-#mensaje {
+/* HUD estilo juego */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
   font-size: 20px;
+  color: #00ff88;
+  text-shadow: 0 0 10px #00ff88;
+}
+
+/* Mensaje tipo game over */
+#mensaje {
+  font-size: 22px;
+  color: #ff0055;
+  text-shadow: 0 0 10px #ff0055;
+  margin-top: 10px;
+}
+
+/* Controles arcade */
+.controles {
+  margin-top: 25px;
+}
+
+.controles button {
+  margin: 5px;
+  padding: 12px 18px;
+  font-size: 20px;
+  background: linear-gradient(145deg, #111, #222);
+  color: #00f7ff;
+  border: 2px solid #00f7ff;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00f7ff;
+  transition: all 0.2s ease;
+}
+
+/* Hover estilo gamer */
+.controles button:hover {
+  background: #00f7ff;
+  color: #000;
+  box-shadow: 0 0 20px #00f7ff;
+  transform: scale(1.1);
+}
+
+/* Botón restart */
+.btn-restart {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 18px;
+  background: linear-gradient(145deg, #ff0055, #990033);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 15px #ff0055;
+  transition: all 0.3s;
+}
+
+.btn-restart:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #ff0055;
+}
+
+/* ===== FONDO ANIMADO ARCADE PRO ===== */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: 
+    linear-gradient(rgba(0,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,0.08) 1px, transparent 1px);
+
+  background-size: 40px 40px;
+  animation: moverGrid 8s linear infinite;
+
+  z-index: -2;
+}
+
+/* Gradiente oscuro elegante */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: radial-gradient(circle at center, #0f2027, #000);
+  z-index: -3;
+}
+
+/* Animación del grid */
+@keyframes moverGrid {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(40px);
+  }
+}
+.arcade-container::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0,255,255,0.15), transparent);
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: blur(80px);
+  z-index: -1;
+}
+/* GAME OVER estilo arcade */
+#mensaje {
+  font-size: 22px;
   font-weight: bold;
-  color: darkred;
   margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+/* CUANDO SEA GAME OVER */
+.game-over {
+  font-size: 50px !important;
+  color: #ff0040;
+  text-shadow:
+    0 0 10px #ff0040,
+    0 0 20px #ff0040,
+    0 0 40px #ff0040;
+  animation: parpadeo 1s infinite;
+}
+
+/* Animación */
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }

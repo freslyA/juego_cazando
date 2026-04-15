@@ -1,33 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Juego Cazando</title>
+  <title>CAZANDO ARCADE</title>
   <link rel="stylesheet" href="cazando.css">
   <script src="utils.js"></script>
-
 </head>
+
 <body onload="inciarJuego();">
 
-  <h1>Juego Cazando</h1>
-  <p>Autor: Fresly Andino</p>
-  <canvas id="areaJuego" width="500" height="500"></canvas>
+  <div class="arcade-container">
 
-  <div class="controles">
-    <button onclick="moverArriba();">⬆</button>
-    <br>
-    <button onclick="moverIzquierda()">⬅</button>
-    <button onclick="moverAbajo();">⬇</button>
-    <button onclick="moverDerecha();">➡</button>
+    <h1 class="titulo">🕹️ CAZANDO ARCADE</h1>
+    <p class="autor">Fresly Andino</p>
+
+    <div class="pantalla">
+      <canvas id="areaJuego" width="500" height="500"></canvas>
+
+      <div class="hud">
+        <span>🏆 <span id="puntos">0</span></span>
+        <span>⏱️ <span id="tiempo">15</span></span>
+      </div>
+
+      <p id="mensaje"></p>
+    </div>
+
+    <div class="controles">
+      <button onclick="moverArriba();">▲</button>
+
+      <div>
+        <button onclick="moverIzquierda()">◀</button>
+        <button onclick="moverAbajo();">▼</button>
+        <button onclick="moverDerecha();">▶</button>
+      </div>
+    </div>
+
+    <button class="btn-restart" onclick="reiniciar();">
+      🔄 RESTART
+    </button>
+    <script>
+  const canvasBG = document.createElement("canvas");
+  document.body.appendChild(canvasBG);
+
+  const ctxBG = canvasBG.getContext("2d");
+
+  canvasBG.style.position = "fixed";
+  canvasBG.style.top = 0;
+  canvasBG.style.left = 0;
+  canvasBG.style.zIndex = -1;
+
+  function resizeCanvas(){
+    canvasBG.width = window.innerWidth;
+    canvasBG.height = window.innerHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  let particles = [];
+
+  for(let i=0;i<60;i++){
+    particles.push({
+      x: Math.random()*canvasBG.width,
+      y: Math.random()*canvasBG.height,
+      r: Math.random()*2 + 0.5,
+      d: Math.random()*0.8 + 0.2
+    });
+  }
+
+  function drawParticles(){
+    ctxBG.clearRect(0,0,canvasBG.width,canvasBG.height);
+
+    ctxBG.fillStyle = "rgba(0, 0, 0, 0.2)";
+    ctxBG.fillRect(0,0,canvasBG.width,canvasBG.height);
+
+    ctxBG.fillStyle = "rgba(0, 255, 255, 0.6)";
+
+    particles.forEach(p=>{
+      ctxBG.beginPath();
+      ctxBG.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctxBG.fill();
+    });
+
+    moveParticles();
+  }
+
+  function moveParticles(){
+    particles.forEach(p=>{
+      p.y += p.d;
+
+      if(p.y > canvasBG.height){
+        p.y = 0;
+        p.x = Math.random()*canvasBG.width;
+      }
+    });
+  }
+
+  setInterval(drawParticles, 30);
+</script>
+
   </div>
-  <button onclick="reiniciar();">reiniciar</button>
-
-
-  <div class="panel">
-    <span>Puntos: <span id="puntos">0</span></span>
-    <span>Tiempo: <span id="tiempo">15</span></span>
-  </div>
-
-  <p id="mensaje"></p>
 
   <script src="cazando.js"></script>
 </body>

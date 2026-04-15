@@ -7,6 +7,7 @@ let comidaY=canvas.height
 let puntaje=0
 let tiempo=15;
 let intervalo;
+
 const ALTO_GATO=20
 const ANCHO_GATO=40
 const ALTO_COMIDA=20
@@ -64,12 +65,17 @@ function dectetarColision(){
     }
 }
 function restarTiempo() {
+    // evita múltiples intervalos
+    clearInterval(intervalo);
+
     intervalo = setInterval(() => {
         mostrarEnSpan("tiempo", tiempo);
 
         if (tiempo <= 0) {
             clearInterval(intervalo);
-            alert("GAME OVER");
+
+            limpiarCanva();
+            dibujarGameOver();
         }
 
         tiempo--;
@@ -81,11 +87,45 @@ function cambiarComida(){
     dibujarComida()
 }
 function reiniciar(){
-    puntaje=0
-    tiempo=15
-    mostrarEnSpan("tiempo",tiempo)
-    mostrarEnSpan("puntos",puntaje)
-    limpiarCanva()
-    cambiarComida()
-    dibujarGato()
+    // detener cualquier intervalo anterior
+    clearInterval(intervalo);
+
+    puntaje = 0;
+    tiempo = 15;
+
+    mostrarEnSpan("tiempo", tiempo);
+    mostrarEnSpan("puntos", puntaje);
+
+    limpiarCanva();
+    cambiarComida();
+    dibujarGato();
+
+    // 🔥 IMPORTANTE: reiniciar cronómetro
+    restarTiempo();
+}
+function dibujarGameOver(){
+    // fondo oscuro con transparencia
+    canva.fillStyle = "rgba(0, 0, 0, 0.75)";
+    canva.fillRect(0, 0, canvas.width, canvas.height);
+
+    // efecto glow rojo
+    canva.shadowColor = "#ff0040";
+    canva.shadowBlur = 30;
+
+    // texto principal
+    canva.fillStyle = "#ff0040";
+    canva.font = "bold 55px Arial";
+    canva.textAlign = "center";
+
+    canva.fillText("GAME OVER", canvas.width/2, canvas.height/2);
+
+    // subtítulo estilo arcade
+    canva.shadowBlur = 10;
+    canva.fillStyle = "#ffffff";
+    canva.font = "20px Arial";
+
+    canva.fillText("Presiona reiniciar", canvas.width/2, canvas.height/2 + 50);
+
+    // reset sombra
+    canva.shadowBlur = 0;
 }
