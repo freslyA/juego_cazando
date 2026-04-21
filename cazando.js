@@ -1,3 +1,5 @@
+let imgGato = new Image();
+imgGato.src = "gato.png"; // 🔥 nombre de tu imagen
 let canvas= document.getElementById("areaJuego")
 let canva=canvas.getContext("2d")
 let gatoX=canvas.width/2
@@ -13,7 +15,7 @@ const ANCHO_GATO=40
 const ALTO_COMIDA=20
 const ANCHO_COMIDA=20
 function dibujarGato(){
-    graficarRectangulo(gatoX,gatoY,ANCHO_GATO,ALTO_GATO,"red");
+    canva.drawImage(imgGato, gatoX, gatoY, ANCHO_GATO, ALTO_GATO);
 }
 function dibujarComida(){
     graficarRectangulo(comidaX-ANCHO_COMIDA,comidaY-ALTO_COMIDA,ANCHO_COMIDA,ALTO_COMIDA,"brown")
