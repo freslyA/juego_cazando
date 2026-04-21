@@ -1,5 +1,7 @@
 let imgGato = new Image();
 imgGato.src = "gato.png"; // 🔥 nombre de tu imagen
+let imgCereza = new Image();
+imgCereza.src = "cereza.png"; // 🔥 nombre de tu imagen
 let canvas= document.getElementById("areaJuego")
 let canva=canvas.getContext("2d")
 let gatoX=canvas.width/2
@@ -18,7 +20,13 @@ function dibujarGato(){
     canva.drawImage(imgGato, gatoX, gatoY, ANCHO_GATO, ALTO_GATO);
 }
 function dibujarComida(){
-    graficarRectangulo(comidaX-ANCHO_COMIDA,comidaY-ALTO_COMIDA,ANCHO_COMIDA,ALTO_COMIDA,"brown")
+     canva.drawImage(
+        imgCereza,
+        comidaX - ANCHO_COMIDA,
+        comidaY - ALTO_COMIDA,
+        ANCHO_COMIDA,
+        ALTO_COMIDA
+    );
 }
 function inciarJuego(){
     restarTiempo()
