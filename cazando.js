@@ -7,7 +7,7 @@ let comidaY=canvas.height
 let puntaje=0
 let tiempo=15;
 let intervalo;
-
+// ya tenia el tiempo en 15 asi que no se modifica nd
 const ALTO_GATO=20
 const ANCHO_GATO=40
 const ALTO_COMIDA=20
