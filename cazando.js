@@ -56,7 +56,8 @@ function dectetarColision(){
         cambiarComida()
         actualizarCanva()
         puntaje=puntaje+1;
-        tiempo=15
+        tiempo=tiempo-1
+        
         mostrarEnSpan("puntos",puntaje)
     }
     if(puntaje==6){
